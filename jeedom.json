@@ -1,0 +1,13 @@
+﻿{
+	"command_error" : {
+		"0" : "je ne connais pas cette commande",
+		"1" : "cette commande m'est inconnue",
+		"2" : "je ne comprend pas cette commande"
+	},
+	"jeedom" : {
+		"0" : "voila",
+		"1" : "c'est fait",
+		"2" : "très bien",
+		"3" : "oui"
+	}
+}

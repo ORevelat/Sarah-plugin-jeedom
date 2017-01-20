@@ -1,0 +1,175 @@
+<grammar version="1.0" xml:lang="fr-FR" mode="voice" root="ruleJEEDOM" xmlns="http://www.w3.org/2001/06/grammar" tag-format="semantics/1.0">
+
+	<rule id="ruleJEEDOM" scope="public">
+    	<tag>out.action=new Object();</tag>
+
+	    <item>Sarah s'il te plait</item>
+
+		<item>
+			<ruleref uri="#JEEDOM" />
+			<tag>out.action.mode = "JEEDOM"; out.action.element = rules.JEEDOM.element; out.action.cmd = rules.JEEDOM.cmd;</tag>
+		</item>
+
+	    <tag>out.action._attributes.uri="http://127.0.0.1:8080/sarah/jeedom";</tag>
+	</rule>
+
+	<rule id="JEEDOM" scope="public">
+		<one-of>
+			<item>
+				<ruleref uri="#JEEDOM_LUM_ON"/>
+				<tag>out.element=rules.JEEDOM_LUM_ON.element; out.cmd=rules.JEEDOM_LUM_ON.cmd;</tag>
+			</item>
+			<item>
+				<ruleref uri="#JEEDOM_LUM_OFF"/>
+				<tag>out.element=rules.JEEDOM_LUM_OFF.element; out.cmd=rules.JEEDOM_LUM_OFF.cmd;</tag>
+			</item>
+			<item>
+				<ruleref uri="#JEEDOM_ASK"/>
+				<tag>out.element=rules.JEEDOM_ASK.element; out.cmd=rules.JEEDOM_ASK.cmd;</tag>
+			</item>
+			<item>
+				<ruleref uri="#JEEDOM_VOLET_UP"/>
+				<tag>out.element=rules.JEEDOM_VOLET_UP.element; out.cmd=rules.JEEDOM_VOLET_UP.cmd;</tag>
+			</item>
+			<item>
+				<ruleref uri="#JEEDOM_VOLET_DOWN"/>
+				<tag>out.element=rules.JEEDOM_VOLET_DOWN.element; out.cmd=rules.JEEDOM_VOLET_DOWN.cmd;</tag>
+			</item>
+			<item>
+				<ruleref uri="#JEEDOM_VOLET_STOP"/>
+				<tag>out.element=rules.JEEDOM_VOLET_STOP.element; out.cmd=rules.JEEDOM_VOLET_STOP.cmd;</tag>
+			</item>
+		</one-of>
+	</rule>
+
+	<rule id="JEEDOM_LUM_ON" scope="public">
+		<item>allume la lumière</item>
+
+		<item>
+			<one-of>
+				<item>du bureau<tag>out.cmd="278";</tag></item>
+				<item>de la salle de bain<tag>out.cmd="266";</tag></item>
+				<item>de la chambre des parents<tag>out.cmd="294";</tag></item>
+				<item>des parents<tag>out.cmd="294";</tag></item>
+				<item>de la chambre de théa<tag>out.cmd="272";</tag></item>
+				<item>de théa<tag>out.cmd="272";</tag></item>
+				<item>de la salle à manger<tag>out.cmd="179";</tag></item>
+				<item>du salon<tag>out.cmd="185";</tag></item>
+				<item>de l'entrée<tag>out.cmd="336";</tag></item>
+			</one-of>
+
+			<tag>out.element="lum_on";</tag>
+		</item>
+	</rule>
+
+	<rule id="JEEDOM_LUM_OFF" scope="public">
+		<item>éteind la lumière</item>
+
+		<item>
+			<one-of>
+				<item>du bureau<tag>out.cmd="279";</tag></item>
+				<item>de la salle de bain<tag>out.cmd="267";</tag></item>
+				<item>de la chambre des parents<tag>out.cmd="295";</tag></item>
+				<item>des parents<tag>out.cmd="295";</tag></item>
+				<item>de la chambre de théa<tag>out.cmd="273";</tag></item>
+				<item>de théa<tag>out.cmd="273";</tag></item>
+				<item>de la salle à manger<tag>out.cmd="180";</tag></item>
+				<item>du salon<tag>out.cmd="186";</tag></item>
+				<item>de l'entrée<tag>out.cmd="337";</tag></item>
+			</one-of>
+			<tag>out.element="lum_off";</tag>
+		</item>
+	</rule>
+
+	<rule id="JEEDOM_ASK" scope="public">
+		<item>
+			<one-of>
+				<item>quelle est la température</item>
+				<item>donne moi la température</item>
+			</one-of>
+		</item>
+
+		<item>
+			<one-of>
+				<item>du</item>
+				<item>de</item>
+				<item>de la</item>
+				<item>de la chambre de</item>
+				<item>de la chambre des</item>
+				<item>dans le</item>
+				<item>dans la chambre de</item>
+				<item>dans la chambre des</item>
+			</one-of>
+		</item>
+
+		<item>
+			<one-of>
+				<item>bureau<tag>out.cmd="356";</tag></item>
+				<item>parents<tag>out.cmd="314";</tag></item>
+				<item>théa<tag>out.cmd="318";</tag></item>
+				<item>salon<tag>out.cmd="312";</tag></item>
+				<item>rez de chaussée<tag>out.cmd="231";</tag></item>
+				<item>jardin<tag>out.cmd="322";</tag></item>
+				<item>l'étage<tag>out.cmd="288";</tag></item>
+			</one-of>
+			<tag>out.element="temp";</tag>
+		</item>
+	</rule>
+
+	<rule id="JEEDOM_VOLET_UP" scope="public">
+		<item>
+			<one-of>
+				<item>
+					<item>ouvre le volet</item>
+					<one-of>
+						<item>de la cuisine<tag>out.cmd="202";</tag></item>
+						<item>de la salle à manger<tag>out.cmd="166";</tag></item>
+						<item>du salon<tag>out.cmd="190";</tag></item>
+					</one-of>
+				</item>
+				<item>ouvre les volets de la maison<tag>out.cmd="202;166;190";</tag></item>
+			</one-of>
+
+			<tag>out.element="volet_up";</tag>
+		</item>
+	</rule>
+
+	<rule id="JEEDOM_VOLET_DOWN" scope="public">
+		<item>
+			<one-of>
+				<item>
+					<item>ferme le volet</item>
+					<one-of>
+						<item>de la cuisine<tag>out.cmd="203";</tag></item>
+						<item>de la salle à manger<tag>out.cmd="167";</tag></item>
+						<item>du salon<tag>out.cmd="191";</tag></item>
+					</one-of>
+				</item>
+
+				<item>ferme les volets de la maison<tag>out.cmd="203;167;191";</tag></item>
+			</one-of>
+
+			<tag>out.element="volet_down";</tag>
+		</item>
+	</rule>
+
+	<rule id="JEEDOM_VOLET_STOP" scope="public">
+		<item>
+			<one-of>
+				<item>arrête le volet</item>
+				<item>stop le volet</item>
+			</one-of>
+		</item>
+
+		<item>
+			<one-of>
+				<item>de la cuisine<tag>out.cmd="209";</tag></item>
+				<item>de la salle à manger<tag>out.cmd="173";</tag></item>
+				<item>du salon<tag>out.cmd="197";</tag></item>
+			</one-of>
+
+			<tag>out.element="volet_stop";</tag>
+		</item>
+	</rule>
+
+</grammar>
